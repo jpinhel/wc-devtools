@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo page — inspected by the harness</title>
+    <!-- The inspector loads FIRST so customElements.define is patched before
+         any component registers (registry + click-to-source capture). -->
+    <script src="/wc-inspector.js"></script>
+    <script>
+      // Command bridge — the inspector only trusts same-window messages
+      // (event.source === window, same rule as with the real content script),
+      // so commands posted by the parent harness are re-posted locally.
+      window.addEventListener('message', (e) => {
+        if (e.source === window.parent && e.data && e.data.__wcdt === 'cmd') {
+          window.postMessage(e.data.command, '*');
+        }
+      });
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 24px;
+        background: #f6f7fb;
+        color: #1a1d27;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      h1 { font-size: 18px; margin: 0; }
+      .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+    </style>
+  </head>
+  <body>
+    <h1>Web Components demo page</h1>
+    <div class="row">
+      <demo-card variant="primary" heading="A Lit card">
+        This content is <strong>slotted</strong> into the card.
+      </demo-card>
+      <demo-card variant="neutral" heading="Another card">
+        Cards expose <code>::part(body)</code> and CSS custom properties.
+      </demo-card>
+    </div>
+    <div class="row">
+      <demo-counter></demo-counter>
+      <demo-clock></demo-clock>
+    </div>
+    <div class="row">
+      <demo-task-user></demo-task-user>
+      <demo-signal-counter></demo-signal-counter>
+    </div>
+    <script type="module" src="/page-components.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "extends": "./.wxt/tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    // TS 7 (native compiler) does not auto-include node_modules/@types the way 5.x did
+    "types": ["chrome", "bun"]
+  }
+}

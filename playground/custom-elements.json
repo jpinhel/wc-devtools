@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "page-components.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "DemoCard",
+          "tagName": "demo-card",
+          "customElement": true,
+          "description": "A card with a colored accent, used to demo the CEM tab.",
+          "attributes": [
+            {
+              "name": "variant",
+              "type": { "text": "'primary' | 'neutral' | 'danger'" },
+              "default": "'primary'",
+              "description": "Color accent of the card."
+            },
+            {
+              "name": "heading",
+              "type": { "text": "string" },
+              "description": "Title shown in the card header."
+            },
+            {
+              "name": "elevated",
+              "type": { "text": "boolean" },
+              "default": "false",
+              "description": "Adds a drop shadow."
+            }
+          ],
+          "slots": [{ "name": "", "description": "Card body content." }],
+          "cssParts": [
+            { "name": "heading", "description": "The header element." },
+            { "name": "body", "description": "The content wrapper." }
+          ],
+          "cssProperties": [
+            {
+              "name": "--demo-accent",
+              "description": "Accent color of the border and heading.",
+              "default": "#6473ff"
+            },
+            { "name": "--demo-card-bg", "description": "Card background.", "default": "#fff" }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "demo-card",
+          "declaration": { "name": "DemoCard", "module": "page-components.js" }
+        }
+      ]
+    }
+  ]
+}

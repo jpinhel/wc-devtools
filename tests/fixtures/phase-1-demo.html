@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WC DevTools — Phase 1 demo</title>
+    <style>
+      body { font-family: system-ui; padding: 2rem; max-width: 720px; margin: auto; }
+      demo-card::part(title) { color: tomato; font-weight: 600; }
+      demo-card::part(badge) { background: gold; padding: 0 4px; border-radius: 4px; }
+      demo-card { --card-radius: 12px; --card-bg: #fafafa; }
+    </style>
+  </head>
+  <body>
+    <h1>WC DevTools demo</h1>
+
+    <h2>Slots + parts</h2>
+    <demo-card heading="A card with slots">
+      <span slot="title">Custom title</span>
+      <p>Default slot content lives here.</p>
+      <span slot="badge">NEW</span>
+    </demo-card>
+
+    <h2>CustomStateSet + ARIA</h2>
+    <demo-toggle aria-controls="info-panel">Toggle info</demo-toggle>
+    <div id="info-panel" hidden>I am described.</div>
+
+    <script type="module" src="./phase-1-demo.ts"></script>
+  </body>
+</html>

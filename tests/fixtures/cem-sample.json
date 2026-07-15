@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/demo-card.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "name": "DemoCard",
+          "tagName": "demo-card",
+          "description": "A card with a header slot and footer.",
+          "attributes": [{"name": "title", "type": {"text": "string"}, "default": "''"}],
+          "events": [{"name": "demo-click", "type": {"text": "CustomEvent"}}],
+          "slots": [{"name": "", "description": "Default content"}, {"name": "footer"}],
+          "cssParts": [{"name": "header", "description": "The card header"}],
+          "cssProperties": [{"name": "--card-bg", "description": "Background color", "default": "white"}]
+        }
+      ]
+    }
+  ]
+}

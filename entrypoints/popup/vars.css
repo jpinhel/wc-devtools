@@ -1,0 +1,101 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+ * popup/vars.css — WC DevTools popup design tokens
+ *
+ * Palette: Tokyo Night (dark) / Tokyo Night (light)
+ * Subset of panel/vars.css — keep in sync when updating.
+ *
+ * Structure
+ * ─────────
+ *   @layer base   dark defaults
+ *   @layer light  light overrides: system auto-detect only (no toggle in popup)
+ * ══════════════════════════════════════════════════════════════════════════════ */
+
+@layer base, light;
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * BASE — Tokyo Night dark defaults
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* ── Backgrounds ── */
+    --bg-0:      #1a1b26;
+    --bg-1:      #1f2335;
+    --bg-2:      #292e42;
+    --bg-header: #16161e;
+
+    /* ── Text ── */
+    --text:       #c0caf5;
+    --text-muted: #a9b1d6;
+
+    /* ── Border ── */
+    --border: #292e42;
+
+    /* ── Accent — Tokyo Night blue ── */
+    --accent:     #7aa2f7;
+    --accent-dim: rgba(122, 162, 247, 0.10);
+
+    /* ── Syntax ── */
+    --tag-color: #7dcfff;
+
+    /* ── State ── */
+    --error: #f7768e;
+
+    /* ── Framework indicators ── */
+    --fw-lit:            #7aa2f7;
+    --fw-lit-bg:         rgba(122, 162, 247, 0.10);
+    --fw-lit-border:     rgba(122, 162, 247, 0.20);
+    --fw-fast:           #bb9af7;
+    --fw-fast-bg:        rgba(187, 154, 247, 0.10);
+    --fw-fast-border:    rgba(187, 154, 247, 0.20);
+    --fw-stencil:        #e0af68;
+    --fw-stencil-bg:     rgba(224, 175, 104, 0.10);
+    --fw-stencil-border: rgba(224, 175, 104, 0.20);
+    --fw-vanilla:        #a9b1d6;
+    --fw-vanilla-bg:     rgba(169, 177, 214, 0.07);
+    --fw-vanilla-border: rgba(169, 177, 214, 0.15);
+
+    /* ── Radius ── */
+    --radius-sm: 3px;
+
+    /* ── Typography ── */
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', 'Menlo', monospace;
+    --font-ui:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * LIGHT — Tokyo Night light (system auto-detect only)
+ * Only tokens that differ from the dark default are listed here.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+@layer light {
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg-0:              #f0f0f4;
+      --bg-1:              #e8e8ed;
+      --bg-2:              #dfdfe5;
+      --bg-header:         #dfdfe5;
+      --border:            #cdcdd6;
+      --text:              #1a1b2e;
+      --text-muted:        #3b3d56;
+      --accent:            #2e5cba;
+      --accent-dim:        rgba( 46,  92, 186, 0.10);
+      --tag-color:         #0969da;
+      --fw-lit:            #2e5cba;
+      --fw-lit-bg:         rgba( 46,  92, 186, 0.10);
+      --fw-lit-border:     rgba( 46,  92, 186, 0.20);
+      --fw-fast:           #6a3bab;
+      --fw-fast-bg:        rgba(106,  59, 171, 0.10);
+      --fw-fast-border:    rgba(106,  59, 171, 0.20);
+      --fw-stencil:        #9a6700;
+      --fw-stencil-bg:     rgba(154, 103,   0, 0.10);
+      --fw-stencil-border: rgba(154, 103,   0, 0.20);
+      --fw-vanilla:        #6e7191;
+      --fw-vanilla-bg:     rgba(110, 113, 145, 0.08);
+      --fw-vanilla-border: rgba(110, 113, 145, 0.15);
+    }
+  }
+}

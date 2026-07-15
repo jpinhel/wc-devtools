@@ -1,0 +1,17 @@
+#!/bin/sh
+# Pre-commit — Biome (lint + format) on staged files only, so it stays fast.
+# The full gate (typecheck, tests, both builds) runs in CI.
+#
+# Installed automatically by `bun install` (postinstall sets core.hooksPath).
+# Bypass for a WIP commit: git commit --no-verify
+
+bunx biome check --staged --no-errors-on-unmatched
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "✗ Biome found problems in staged files."
+  echo "  Fix automatically :  bun run lint:fix   (then re-stage)"
+  echo "  Commit anyway     :  git commit --no-verify"
+  exit $status
+fi

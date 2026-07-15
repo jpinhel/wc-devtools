@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WC DevTools — playground</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; height: 100vh; display: flex; flex-direction: column;
+             font-family: system-ui, sans-serif; background: #14161f; }
+      header { padding: 8px 14px; color: #9aa1b5; font-size: 12px;
+               border-bottom: 1px solid #2a2e3f; }
+      header strong { color: #e6e8f0; }
+      main { flex: 1; display: flex; min-height: 0; }
+      iframe { border: none; height: 100%; }
+      #page { flex: 1; background: #f6f7fb; }
+      #panel { flex: 1.2; border-left: 1px solid #2a2e3f; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>WC DevTools playground</strong> — the real built panel (right) inspecting a live
+      demo page (left) through the extension's message protocol, no browser extension involved.
+    </header>
+    <main>
+      <iframe id="page" src="/page.html" title="demo page"></iframe>
+      <iframe id="panel" title="devtools panel"></iframe>
+    </main>
+    <script src="/harness.js"></script>
+  </body>
+</html>

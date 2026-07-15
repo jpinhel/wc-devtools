@@ -1,0 +1,40 @@
+name: Bug report
+description: Something is broken or behaves unexpectedly
+labels: [bug]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page where it happens
+      description: URL (or "any page"). Public URLs make bugs 10× easier to reproduce.
+      placeholder: https://shoelace.style/components/alert
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the Web Components panel
+        2. Select <sl-alert>
+        3. Edit the `variant` property
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser + version
+      placeholder: Chrome 140 / Firefox 133
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output
+      description: Errors in the page console, the panel console (right-click panel → Inspect), or the service worker console (chrome://extensions → Inspect views).

@@ -1,0 +1,266 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+ * panel/vars.css — Shadow design tokens (WC DevTools refresh)
+ *
+ * Palette: Shadow — iris accent on near-black surfaces (dark) / paper (light).
+ * Inspired by Linear / Vercel / Raycast.
+ *
+ * Structure
+ * ─────────
+ *   @layer base   dark defaults — the source of truth for every token
+ *   @layer light  light overrides: system auto-detect + explicit [data-theme="light"]
+ *   @layer dark   explicit dark override — wins over system light preference
+ *
+ * How the cascade works
+ * ─────────────────────
+ *   Layer priority (highest last): base < light < dark
+ *   • No data-theme + dark system  → base wins  → dark
+ *   • No data-theme + light system → light wins  → light  (via @media)
+ *   • data-theme="light"           → light wins  → light  (via selector)
+ *   • data-theme="dark"            → dark wins   → dark   (overrides @media)
+ * ══════════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+@layer base, light, dark;
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * BASE — Shadow dark defaults
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* ── Backgrounds ── */
+    --bg-0:      #0a0b0e;   /* outermost app surface           */
+    --bg-1:      #0f1014;   /* panels, toolbar, status bar     */
+    --bg-2:      #14161b;   /* elevated surfaces, code blocks  */
+    --bg-3:      #1a1c22;   /* hover targets, badges, chips    */
+    --bg-header: #0f1014;   /* top bar surface                 */
+
+    /* ── Text ── */
+    --text:       #e8e9ec;   /* primary                         */
+    --text-muted: #8a8f99;   /* secondary                       */
+    --text-dim:   #5a606b;   /* tertiary / disabled             */
+
+    /* ── Border ── */
+    --border: rgba(255, 255, 255, 0.06);
+
+    /* ── Interaction ── */
+    --hover-bg:      rgba(255, 255, 255, 0.03);
+    --selected-bg:   rgba(124, 110, 245, 0.10);
+    --selected-text: #fafafb;
+
+    /* ── Accent — Iris ── */
+    --accent:      #8b7cf6;
+    --accent-dim:  rgba(139, 124, 246, 0.14);
+    --accent-glow: rgba(139, 124, 246, 0.35);
+
+    /* ── Syntax / value display ── */
+    --tag-color:   #7dd3fc;   /* cyan — element tags             */
+    --val-string:  #a5d99a;   /* green — strings                 */
+    --val-number:  #f5b97a;   /* amber — numbers                 */
+    --val-boolean: #f29ec1;   /* pink — booleans/keywords        */
+    --val-null:    #5a606b;   /* dim                             */
+    --val-object:  #c4b5fd;   /* lilac — props/objects           */
+
+    /* ── Framework indicators (base color + derived alpha surfaces) ── */
+    --fw-lit:            #c4b5fd;   /* Lit: lilac, matches tag-prop       */
+    --fw-lit-bg:         rgba(196, 181, 253, 0.10);
+    --fw-lit-border:     rgba(196, 181, 253, 0.20);
+    --fw-fast:           #bb9af7;
+    --fw-fast-bg:        rgba(187, 154, 247, 0.10);
+    --fw-fast-border:    rgba(187, 154, 247, 0.20);
+    --fw-stencil:        #f5b97a;
+    --fw-stencil-bg:     rgba(245, 185, 122, 0.10);
+    --fw-stencil-border: rgba(245, 185, 122, 0.20);
+    --fw-vanilla:        #8a8f99;
+    --fw-vanilla-bg:     rgba(138, 143, 153, 0.07);
+    --fw-vanilla-border: rgba(138, 143, 153, 0.15);
+
+    /* ── State & feedback ── */
+    --error:          #f47b7b;
+    --success:        #6ddca0;
+    --warning:        #f5b97a;
+    --warning-bg:     rgba(245, 185, 122, 0.10);
+    --warning-border: rgba(245, 185, 122, 0.25);
+    --edit-ok-bg:     rgba(109, 220, 160, 0.08);
+    --edit-err-bg:    rgba(244, 123, 123, 0.08);
+
+    /* ── Shadows ── */
+    --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px -8px rgba(10, 12, 18, 0.45), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+
+    /* ── Layout constants ── */
+    --header-height: 38px;
+    --status-height: 24px;
+    --tab-height:    36px;
+
+    /* ── Radius ── */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+
+    /* ── Motion ── */
+    --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+    /* ── Typography — Geist (sans) + Geist Mono ── */
+    --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --font-ui:   'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * LIGHT — Shadow light overrides (system auto-detect + explicit choice)
+ * Only tokens that differ from the dark default are listed here.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+@layer light {
+  /* Auto: system reports light preference and user hasn't forced dark */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg-0:              #fbfbfa;
+      --bg-1:              #ffffff;
+      --bg-2:              #ffffff;
+      --bg-3:              #f5f5f3;
+      --bg-header:         #ffffff;
+      --border:            rgba(0, 0, 0, 0.07);
+      --text:              #1c1d22;
+      --text-muted:        #6b7280;
+      --text-dim:          #9aa0aa;
+      --hover-bg:          rgba(0, 0, 0, 0.025);
+      --selected-bg:       rgba(94, 78, 230, 0.08);
+      --selected-text:     #0a0b0e;
+      --accent:            #5e4ee6;
+      --accent-dim:        rgba(94, 78, 230, 0.10);
+      --accent-glow:       rgba(94, 78, 230, 0.30);
+      --tag-color:         #0e8fc7;
+      --val-string:        #2f8a3a;
+      --val-number:        #b96d10;
+      --val-boolean:       #b53c6e;
+      --val-null:          #9aa0aa;
+      --val-object:        #6b46c1;
+      --fw-lit:            #6b46c1;
+      --fw-lit-bg:         rgba(107, 70, 193, 0.08);
+      --fw-lit-border:     rgba(107, 70, 193, 0.18);
+      --fw-fast:           #6a3bab;
+      --fw-fast-bg:        rgba(106,  59, 171, 0.10);
+      --fw-fast-border:    rgba(106,  59, 171, 0.20);
+      --fw-stencil:        #b96d10;
+      --fw-stencil-bg:     rgba(185, 109,  16, 0.08);
+      --fw-stencil-border: rgba(185, 109,  16, 0.18);
+      --fw-vanilla:        #6b7280;
+      --fw-vanilla-bg:     rgba(107, 114, 128, 0.07);
+      --fw-vanilla-border: rgba(107, 114, 128, 0.15);
+      --warning-bg:        rgba(185, 109,  16, 0.10);
+      --warning-border:    rgba(185, 109,  16, 0.25);
+      --edit-ok-bg:        rgba( 47, 138,  58, 0.08);
+      --edit-err-bg:       rgba(196,  56,  56, 0.08);
+      --error:             #c43838;
+      --success:           #2f8a3a;
+      --warning:           #b96d10;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 8px 24px -10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  /* Explicit: user chose light regardless of system preference */
+  :root[data-theme="light"] {
+    --bg-0:              #fbfbfa;
+    --bg-1:              #ffffff;
+    --bg-2:              #ffffff;
+    --bg-3:              #f5f5f3;
+    --bg-header:         #ffffff;
+    --border:            rgba(0, 0, 0, 0.07);
+    --text:              #1c1d22;
+    --text-muted:        #6b7280;
+    --text-dim:          #9aa0aa;
+    --hover-bg:          rgba(0, 0, 0, 0.025);
+    --selected-bg:       rgba(94, 78, 230, 0.08);
+    --selected-text:     #0a0b0e;
+    --accent:            #5e4ee6;
+    --accent-dim:        rgba(94, 78, 230, 0.10);
+    --accent-glow:       rgba(94, 78, 230, 0.30);
+    --tag-color:         #0e8fc7;
+    --val-string:        #2f8a3a;
+    --val-number:        #b96d10;
+    --val-boolean:       #b53c6e;
+    --val-null:          #9aa0aa;
+    --val-object:        #6b46c1;
+    --fw-lit:            #6b46c1;
+    --fw-lit-bg:         rgba(107, 70, 193, 0.08);
+    --fw-lit-border:     rgba(107, 70, 193, 0.18);
+    --fw-fast:           #6a3bab;
+    --fw-fast-bg:        rgba(106,  59, 171, 0.10);
+    --fw-fast-border:    rgba(106,  59, 171, 0.20);
+    --fw-stencil:        #b96d10;
+    --fw-stencil-bg:     rgba(185, 109,  16, 0.08);
+    --fw-stencil-border: rgba(185, 109,  16, 0.18);
+    --fw-vanilla:        #6b7280;
+    --fw-vanilla-bg:     rgba(107, 114, 128, 0.07);
+    --fw-vanilla-border: rgba(107, 114, 128, 0.15);
+    --warning-bg:        rgba(185, 109,  16, 0.10);
+    --warning-border:    rgba(185, 109,  16, 0.25);
+    --edit-ok-bg:        rgba( 47, 138,  58, 0.08);
+    --edit-err-bg:       rgba(196,  56,  56, 0.08);
+    --error:             #c43838;
+    --success:           #2f8a3a;
+    --warning:           #b96d10;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px -10px rgba(0, 0, 0, 0.12);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * DARK — explicit override
+ * Wins over @layer light (layer order: base < light < dark).
+ * Needed when a light-preference system user forces dark mode.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+@layer dark {
+  :root[data-theme="dark"] {
+    --bg-0:              #0a0b0e;
+    --bg-1:              #0f1014;
+    --bg-2:              #14161b;
+    --bg-3:              #1a1c22;
+    --bg-header:         #0f1014;
+    --border:            rgba(255, 255, 255, 0.06);
+    --text:              #e8e9ec;
+    --text-muted:        #8a8f99;
+    --text-dim:          #5a606b;
+    --hover-bg:          rgba(255, 255, 255, 0.03);
+    --selected-bg:       rgba(124, 110, 245, 0.10);
+    --selected-text:     #fafafb;
+    --accent:            #8b7cf6;
+    --accent-dim:        rgba(139, 124, 246, 0.14);
+    --accent-glow:       rgba(139, 124, 246, 0.35);
+    --tag-color:         #7dd3fc;
+    --val-string:        #a5d99a;
+    --val-number:        #f5b97a;
+    --val-boolean:       #f29ec1;
+    --val-null:          #5a606b;
+    --val-object:        #c4b5fd;
+    --fw-lit:            #c4b5fd;
+    --fw-lit-bg:         rgba(196, 181, 253, 0.10);
+    --fw-lit-border:     rgba(196, 181, 253, 0.20);
+    --fw-fast:           #bb9af7;
+    --fw-fast-bg:        rgba(187, 154, 247, 0.10);
+    --fw-fast-border:    rgba(187, 154, 247, 0.20);
+    --fw-stencil:        #f5b97a;
+    --fw-stencil-bg:     rgba(245, 185, 122, 0.10);
+    --fw-stencil-border: rgba(245, 185, 122, 0.20);
+    --fw-vanilla:        #8a8f99;
+    --fw-vanilla-bg:     rgba(138, 143, 153, 0.07);
+    --fw-vanilla-border: rgba(138, 143, 153, 0.15);
+    --warning-bg:        rgba(245, 185, 122, 0.10);
+    --warning-border:    rgba(245, 185, 122, 0.25);
+    --edit-ok-bg:        rgba(109, 220, 160, 0.08);
+    --edit-err-bg:       rgba(244, 123, 123, 0.08);
+    --error:             #f47b7b;
+    --success:           #6ddca0;
+    --warning:           #f5b97a;
+    --shadow-sm: 0 1px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 24px -8px rgba(10, 12, 18, 0.45), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  }
+}
